@@ -55,3 +55,58 @@ To learn more about the technologies used in this project, check out the followi
 ## Deployment
 
 This project can be easily deployed on platforms like Vercel or any other hosting service that supports Next.js applications.
+
+## Environment Variables
+
+Create a `.env` file in the root directory and add the following variables:
+
+### Setting Up Environment Variables
+
+1. **Database URL**
+   - Format: `postgresql://USERNAME:PASSWORD@HOST:PORT/DATABASE`
+   - Example for local development: `postgresql://postgres:password@localhost:5432/auth_db`
+   - For production, use your database provider's connection string
+
+2. **NextAuth Secret**
+   - Generate a secure random string for `NEXTAUTH_SECRET`
+   - You can use this command in terminal:
+     ```bash
+     openssl rand -base64 32
+     ```
+   - Example: `NEXTAUTH_SECRET="8KVgwNXUqCGKBG/IDf2RFN9aeRvit5wFHVEgBtDVOeM="`
+
+3. **NextAuth URL**
+   - Development: `http://localhost:3000`
+   - Production: Your actual domain (e.g., `https://your-app.com`)
+
+4. **Email (SMTP) Configuration**
+   
+   For Gmail:
+   ```env
+   SMTP_HOST="smtp.gmail.com"
+   SMTP_PORT=587
+   SMTP_SECURE=false
+   SMTP_USER="your-gmail@gmail.com"
+   SMTP_PASSWORD="your-app-specific-password"
+   SMTP_FROM="your-gmail@gmail.com"
+   ```
+
+   For SendGrid:
+   ```env
+   SMTP_HOST="smtp.sendgrid.net"
+   SMTP_PORT=587
+   SMTP_SECURE=false
+   SMTP_USER="apikey"
+   SMTP_PASSWORD="your-sendgrid-api-key"
+   SMTP_FROM="verified-sender@yourdomain.com"
+   ```
+
+### Important Notes
+
+- Never commit your `.env` file to version control
+- Use strong, unique passwords for production environments
+- For Gmail, you'll need to:
+  1. Enable 2-Step Verification
+  2. Generate an App Password (Settings → Security → App Passwords)
+- Make sure `SMTP_FROM` is a verified sender email address
+- In development, you can use [Mailtrap](https://mailtrap.io)
